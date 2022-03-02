@@ -22,21 +22,22 @@ public class Articulo implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_articulo;
 
-	@OneToMany(mappedBy = "articulo")
+	private int unidades_stock;
+	private int stock_seguridad;
+	
+	private String imagen;
+	private String descripcion;
+	
+	@OneToMany(mappedBy = "articulos")
 	private Set<Compra> compras;
 	
 	@Column(nullable=false)
 	private String nombre;
 	
-	private String descripcion;
-	
 	@Column(nullable=false)
 	private double precio_unidad;
 	
-	private int unidades_stock;
-	private int stock_seguridad;
 	
-	private String imagen;
 
 	public Long getId_articulo() {
 		return id_articulo;
