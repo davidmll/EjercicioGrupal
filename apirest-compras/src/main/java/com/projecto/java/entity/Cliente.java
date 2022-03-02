@@ -28,14 +28,15 @@ public class Cliente implements Serializable {
 	private String apellidos;
 	private String empresa;
 	private String puesto;
-	private int cp;
 	private String provincia;
+	
+	private int cp;
 	private int telefono;
 
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "clientes")
 	private Set<Compra> compras;
 
 	@PrePersist

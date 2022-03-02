@@ -17,25 +17,27 @@ public class Articulo implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "articulos")
-	Set<Articulo>articulos;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_articulo;
-	
-	@Column(nullable=false)
-	private String nombre;
-	
-	private String descripcion;
-	
-	@Column(nullable=false)
-	private double precio_unidad;
-	
+
 	private int unidades_stock;
 	private int stock_seguridad;
 	
 	private String imagen;
+	private String descripcion;
+	
+	@OneToMany(mappedBy = "articulos")
+	private Set<Compra> compras;
+	
+	@Column(nullable=false)
+	private String nombre;
+	
+	@Column(nullable=false)
+	private double precio_unidad;
+	
+	
 
 	public Long getId_articulo() {
 		return id_articulo;
@@ -93,5 +95,12 @@ public class Articulo implements Serializable{
 		this.imagen = imagen;
 	}
 
+	public Set<Compra> getCompras() {
+		return compras;
+	}
+	
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
+	}
 	
 }
