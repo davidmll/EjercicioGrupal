@@ -3,13 +3,7 @@ package com.projecto.java.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="articulos")
@@ -20,35 +14,35 @@ public class Articulo implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_articulo;
+	private Long codArticulo;
 
 	private int unidades_stock;
 	private int stock_seguridad;
 	
 	private String imagen;
 	private String descripcion;
-	
-	@OneToMany(mappedBy = "articulos")
-	private Set<Compra> compras;
-	
 	@Column(nullable=false)
 	private String nombre;
 	
 	@Column(nullable=false)
 	private double precio_unidad;
 	
+	@OneToMany(mappedBy = "articulo")
+	private Set<Compra> compras;
 	
+//	Getters and Setters
 
-	public Long getId_articulo() {
-		return id_articulo;
-	}
-
-	public void setId_articulo(Long id_articulo) {
-		this.id_articulo = id_articulo;
-	}
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public Long getCodArticulo() {
+		return codArticulo;
+	}
+
+	public void setCodArticulo(Long codArticulo) {
+		this.codArticulo = codArticulo;
 	}
 
 	public void setNombre(String nombre) {
