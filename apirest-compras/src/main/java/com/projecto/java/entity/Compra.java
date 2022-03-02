@@ -61,7 +61,6 @@ public class Compra implements Serializable {
 		this.idcompra = idcompra;
 	}
 
->>>>>>> branch 'master' of https://github.com/davidmll/EjercicioGrupal.git
 	public Long getCodCliente() {
 		return codCliente;
 	}
