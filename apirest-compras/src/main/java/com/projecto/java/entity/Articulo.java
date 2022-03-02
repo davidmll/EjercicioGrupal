@@ -1,18 +1,27 @@
 package com.projecto.java.entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="articulos")
-public class Articulo {
+public class Articulo implements Serializable{
+	
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToMany(mappedBy = "articulos")
+	Set<Articulo>articulos;
 	private Long id_articulo;
 	
 	@Column(nullable=false)
@@ -84,8 +93,5 @@ public class Articulo {
 		this.imagen = imagen;
 	}
 
-	
-	
-	
 	
 }

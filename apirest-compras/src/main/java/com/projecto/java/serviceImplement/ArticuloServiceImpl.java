@@ -3,6 +3,7 @@ package com.projecto.java.serviceImplement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.projecto.java.Dao.ArticuloRepository;
 import com.projecto.java.entity.Articulo;
@@ -14,26 +15,28 @@ public class ArticuloServiceImpl implements ArticuloService {
 	private ArticuloRepository articuloRepository;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Articulo> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Articulo>) articuloRepository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Articulo findById(Long id_articulo) {
 		// TODO Auto-generated method stub
-		return null;
+		return articuloRepository.findById(id_articulo).orElse(null);
 	}
 
 	@Override
+	@Transactional
 	public Articulo save(Articulo articulo) {
-		// TODO Auto-generated method stub
-		return null;
+		return articuloRepository.save(articulo);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id_articulo) {
-		// TODO Auto-generated method stub
+		articuloRepository.deleteById(id_articulo);
 		
 	}
 
