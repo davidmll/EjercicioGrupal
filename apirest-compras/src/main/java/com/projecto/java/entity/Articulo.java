@@ -13,7 +13,7 @@ public class Articulo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long id_articulo;
 	
 	@Column(nullable=false)
 	private String nombre;
@@ -29,11 +29,11 @@ public class Articulo {
 	private String imagen;
 
 	public Long getId() {
-		return id;
+		return id_articulo;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long id_articulo) {
+		this.id_articulo = id_articulo;
 	}
 
 	public String getNombre() {
