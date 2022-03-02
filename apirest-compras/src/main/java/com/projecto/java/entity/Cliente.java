@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 
-	@OneToMany(mappedBy = "clientes")
+	@OneToMany(mappedBy = "cliente")
 	private Set<Compra> compras;
 
 	@PrePersist

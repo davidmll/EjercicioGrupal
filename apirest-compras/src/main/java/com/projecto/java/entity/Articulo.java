@@ -12,63 +12,36 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="articulos")
-public class Articulo implements Serializable{
-	
-	
+@Table(name = "articulos")
+public class Articulo implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_articulo;
+	private Long codArticulo;
 
 	private int unidades_stock;
 	private int stock_seguridad;
-	
+
 	private String imagen;
 	private String descripcion;
-	
-	@OneToMany(mappedBy = "articulos")
+
+	@OneToMany(mappedBy = "articulo")
 	private Set<Compra> compras;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String nombre;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private double precio_unidad;
-	
-	
 
-	public Long getId_articulo() {
-		return id_articulo;
+	public Long getCodArticulo() {
+		return codArticulo;
 	}
 
-	public void setId_articulo(Long id_articulo) {
-		this.id_articulo = id_articulo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public double getPrecio_unidad() {
-		return precio_unidad;
-	}
-
-	public void setPrecio_unidad(double precio_unidad) {
-		this.precio_unidad = precio_unidad;
+	public void setCodArticulo(Long codArticulo) {
+		this.codArticulo = codArticulo;
 	}
 
 	public int getUnidades_stock() {
@@ -95,12 +68,36 @@ public class Articulo implements Serializable{
 		this.imagen = imagen;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public Set<Compra> getCompras() {
 		return compras;
 	}
-	
+
 	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
 	}
-	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio_unidad() {
+		return precio_unidad;
+	}
+
+	public void setPrecio_unidad(double precio_unidad) {
+		this.precio_unidad = precio_unidad;
+	}
+
 }
