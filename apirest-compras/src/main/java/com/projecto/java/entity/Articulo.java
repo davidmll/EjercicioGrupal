@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,15 +17,13 @@ public class Articulo implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
-
-	@ManyToOne
-	@MapsId("codCliente")
-	@JoinColumn(name = "codCliente")
-	private Long codCliente;
-	@ManyToOne 
-	@MapsId("id_articulo") 
-	@JoinColumn(name = "id_articulo") 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_articulo;
+
+	@OneToMany(mappedBy = "articulo")
+	private Set<Compra> compras;
 	
 	@Column(nullable=false)
 	private String nombre;
@@ -98,5 +94,12 @@ public class Articulo implements Serializable{
 		this.imagen = imagen;
 	}
 
+	public Set<Compra> getCompras() {
+		return compras;
+	}
+	
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
+	}
 	
 }
