@@ -5,22 +5,30 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="compras")
-public class Compras implements Serializable{
+public class Compra implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@ManyToMany(cascade = CascadeType.ALL)
-	
+	@ManyToOne
+	@MapsId("codCliente")
+	@JoinColumn(name = "codCliente")
 	private Long codCliente;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToOne 
+	@MapsId("id_articulo") 
+	@JoinColumn(name = "id_articulo") 
 	private Long id_articulo;
+		
+	
 	
 	private Date fecha;
 	private int unidades;
