@@ -1,14 +1,14 @@
 package com.projecto.java.entity;
 
 import java.io.Serializable;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +20,8 @@ public class Articulo implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@ManyToMany(mappedBy = "articulos")
+	@OneToMany(mappedBy = "articulos")
+	Set<Articulo>articulos;
 	private Long id_articulo;
 	
 	@Column(nullable=false)
