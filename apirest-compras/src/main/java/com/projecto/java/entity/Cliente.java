@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
 	private Date fechaNacimiento;
 
 	@OneToMany(mappedBy = "cliente")
-	private Set<Compras> compras;
+	private Set<Compra> compras;
 
 	@PrePersist
 	public void prePersist() {
@@ -115,11 +115,11 @@ public class Cliente implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Set<Compras> getCompras() {
+	public Set<Compra> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(Set<Compras> compras) {
+	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
 	}
 
