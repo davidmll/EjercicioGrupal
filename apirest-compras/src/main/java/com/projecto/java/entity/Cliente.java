@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,7 @@ public class Cliente implements Serializable {
 	private String provincia;
 	private int telefono;
 
+	@Column(name="fechaNacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 
