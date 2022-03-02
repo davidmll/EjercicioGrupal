@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +33,11 @@ public class Compra implements Serializable{
 	
 	private Date fecha;
 	private int unidades;
+	
+	@PrePersist
+	public void prePersist() {
+		fecha = new Date();
+	}
 	
 	public Long getCodCliente() {
 		return codCliente;
