@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.projecto.java.Dao.ClienteRepository;
 import com.projecto.java.entity.Cliente;
-import com.projecto.java.service.ClienteServicie;
+import com.projecto.java.service.ClienteService;
 @Service
-public class ClienteServiceImpl implements ClienteServicie {
+public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
 	private ClienteRepository repositorio;

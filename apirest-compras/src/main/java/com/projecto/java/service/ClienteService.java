@@ -6,7 +6,7 @@ import com.projecto.java.entity.Cliente;
 
 
 
-public interface ClienteServicie {
+public interface ClienteService {
 	public List<Cliente> findAll();
 	public Cliente findById(Long codCliente);	
 	public Cliente save(Cliente cliente);
