@@ -22,9 +22,9 @@ public class ArticuloServiceImpl implements ArticuloService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public Articulo findById(Long id_articulo) {
+	public Articulo findById(Long codArticulo) {
 		// TODO Auto-generated method stub
-		return articuloRepository.findById(id_articulo).orElse(null);
+		return articuloRepository.findById(codArticulo).orElse(null);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class ArticuloServiceImpl implements ArticuloService {
 
 	@Override
 	@Transactional
-	public void delete(Long id_articulo) {
-		articuloRepository.deleteById(id_articulo);
+	public void delete(Long codArticulo) {
+		articuloRepository.deleteById(codArticulo);
 		
 	}
 

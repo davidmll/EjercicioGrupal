@@ -10,11 +10,11 @@ public interface ArticuloService {
 	
 	public List<Articulo> findAll();
 	
-	public Articulo findById(Long id_articulo);
+	public Articulo findById(Long codArticulo);
 	
-	public Articulo save(Articulo articulo);
+	public Articulo save(Articulo codArticulo);
 	
-	public void delete(Long id_articulo);
+	public void delete(Long codArticulo);
 	
 	
 	
