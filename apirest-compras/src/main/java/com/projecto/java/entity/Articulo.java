@@ -28,11 +28,11 @@ public class Articulo {
 	
 	private String imagen;
 
-	public Long getId() {
+	public Long getId_articulo() {
 		return id_articulo;
 	}
 
-	public void setId(Long id_articulo) {
+	public void setId_articulo(Long id_articulo) {
 		this.id_articulo = id_articulo;
 	}
 
@@ -83,6 +83,8 @@ public class Articulo {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+
+	
 	
 	
 	
