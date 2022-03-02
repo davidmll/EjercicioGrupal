@@ -20,6 +20,7 @@ public class Compra implements Serializable {
 
 	private int unidades;
 
+
 	@ManyToOne
 	@JoinColumn(name = "codCliente")
 	private Cliente cliente;
@@ -78,5 +79,6 @@ public class Compra implements Serializable {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
 
 }
