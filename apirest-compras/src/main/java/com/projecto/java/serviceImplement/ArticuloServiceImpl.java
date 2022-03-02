@@ -3,12 +3,14 @@ package com.projecto.java.serviceImplement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projecto.java.Dao.ArticuloRepository;
 import com.projecto.java.entity.Articulo;
 import com.projecto.java.service.ArticuloService;
 
+@Service
 public class ArticuloServiceImpl implements ArticuloService {
 
 	@Autowired

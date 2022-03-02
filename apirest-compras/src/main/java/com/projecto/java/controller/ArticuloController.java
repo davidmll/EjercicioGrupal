@@ -1,8 +1,8 @@
 package com.projecto.java.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,8 +24,8 @@ public class ArticuloController {
 	private ArticuloService servicio;
 	
 	@GetMapping({"/articulos","/todos"})
-	public Set<Articulo> index(){
-		return (Set<Articulo>) servicio.findAll();
+	public List<Articulo> index(){
+		return servicio.findAll();
 	}
 	
 	@GetMapping("articulos/{id}")
