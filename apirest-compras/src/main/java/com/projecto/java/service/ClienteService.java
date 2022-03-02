@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.projecto.java.entity.Cliente;
 
-
-
 public interface ClienteService {
 	public List<Cliente> findAll();
 	public Cliente findById(Long codCliente);	

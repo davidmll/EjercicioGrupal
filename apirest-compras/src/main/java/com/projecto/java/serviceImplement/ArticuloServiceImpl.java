@@ -3,12 +3,14 @@ package com.projecto.java.serviceImplement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projecto.java.Dao.ArticuloRepository;
 import com.projecto.java.entity.Articulo;
 import com.projecto.java.service.ArticuloService;
 
+@Service
 public class ArticuloServiceImpl implements ArticuloService {
 
 	@Autowired
@@ -22,9 +24,9 @@ public class ArticuloServiceImpl implements ArticuloService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public Articulo findById(Long id_articulo) {
+	public Articulo findById(Long codArticulo) {
 		// TODO Auto-generated method stub
-		return articuloRepository.findById(id_articulo).orElse(null);
+		return articuloRepository.findById(codArticulo).orElse(null);
 	}
 
 	@Override
@@ -35,8 +37,8 @@ public class ArticuloServiceImpl implements ArticuloService {
 
 	@Override
 	@Transactional
-	public void delete(Long id_articulo) {
-		articuloRepository.deleteById(id_articulo);
+	public void delete(Long codArticulo) {
+		articuloRepository.deleteById(codArticulo);
 		
 	}
 

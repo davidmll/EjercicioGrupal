@@ -35,6 +35,7 @@ public class ClienteServiceImpl implements ClienteService {
 		return repositorio.save(cliente);
 	}
 
+//	Pendiente
 	@Override
 	public Cliente deleteConRetorno(Long codCliente) {		
 		Cliente c = repositorio.findById(codCliente).get();
