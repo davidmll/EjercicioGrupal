@@ -16,7 +16,7 @@ public class Compra implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int codCompra;
+	private Long codCompra;
 
 	private int unidades;
 
@@ -39,16 +39,18 @@ public class Compra implements Serializable {
 
 //	Getters and Setters
 
-	public int getCodCompra() {
-		return codCompra;
-	}
-
-	public void setCodCompra(int codCompra) {
-		this.codCompra = codCompra;
-	}
+	
 
 	public int getUnidades() {
 		return unidades;
+	}
+
+	public Long getCodCompra() {
+		return codCompra;
+	}
+
+	public void setCodCompra(Long codCompra) {
+		this.codCompra = codCompra;
 	}
 
 	public void setUnidades(int unidades) {
