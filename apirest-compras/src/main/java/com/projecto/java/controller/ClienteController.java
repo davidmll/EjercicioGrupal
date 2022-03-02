@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projecto.java.entity.Cliente;
-import com.projecto.java.service.ClienteServicie;
+import com.projecto.java.service.ClienteService;
 
 @RestController
 @RequestMapping("/api")
 public class ClienteController {
 	
 	@Autowired
-	private ClienteServicie servicio;
+	private ClienteService servicio;
 
 	@GetMapping("/clientes")
 	public List<Cliente> index() {
