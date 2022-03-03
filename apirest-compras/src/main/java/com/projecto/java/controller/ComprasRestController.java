@@ -32,15 +32,15 @@ public class ComprasRestController {
 		return servicio.findAll();
 	}
 
-	@GetMapping("/compras/{id}")
-	public ResponseEntity<?> buscarCompraporId(@PathVariable Long id) {
+	@GetMapping("/compra/{cod_compra}")
+	public ResponseEntity<?> buscarCompraporId(@PathVariable Long cod_compra) {
 
 		Compra compra = null;
 
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			compra = servicio.findById(id);
+			compra = servicio.findById(cod_compra);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar consulta");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -49,14 +49,14 @@ public class ComprasRestController {
 		}
 
 		if (compra == null) {
-			response.put("mensaje", "La compra con id:".concat(id.toString().concat(" no existe en la BD.")));
+			response.put("mensaje", "La compra con id:".concat(cod_compra.toString().concat(" no existe en la BD.")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 
 		return new ResponseEntity<Compra>(compra, HttpStatus.OK);
 	}
 
-	@PostMapping("/compra")
+	@PostMapping("/compra/saveCompra")
 	public ResponseEntity<?> guardarCompra(@RequestBody Compra compra) {
 
 		Compra compraNuevo = null;
@@ -76,20 +76,20 @@ public class ComprasRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/compra/{id}")
-	public ResponseEntity<?> actualizarCompra(@RequestBody Compra compra, @PathVariable Long id) {
+	@PutMapping("/compra/updateCompra/{cod_compra}")
+	public ResponseEntity<?> actualizarCompra(@RequestBody Compra compra, @PathVariable Long cod_compra) {
 
-		Compra compraActualizar = servicio.findById(id);
+		Compra compraActualizar = servicio.findById(cod_compra);
 
 		Map<String, Object> response = new HashMap<>();
 
 		if (compraActualizar == null) {
-			response.put("mensaje", "La compra id:".concat(id.toString().concat(" no existe en la BD.")));
+			response.put("mensaje", "La compra id:".concat(cod_compra.toString().concat(" no existe en la BD.")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 
 		try {
-			compraActualizar.setCod_compra(id);
+			compraActualizar.setCod_compra(cod_compra);
 			compraActualizar.setUnidades(compra.getUnidades());
 			compraActualizar.setFecha(compra.getFecha());
 
@@ -108,14 +108,14 @@ public class ComprasRestController {
 
 	}
 
-	@DeleteMapping("/compra/{id}") // pendiente
-	public ResponseEntity<?> eliminarCompra(@PathVariable Long id) {
+	@DeleteMapping("/compra/deleteCompra/{cod_compra}")
+	public ResponseEntity<?> eliminarCompra(@PathVariable Long cod_compra) {
 
-		Compra compraActualizar = servicio.findById(id);
+		Compra compraActualizar = servicio.findById(cod_compra);
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			servicio.delete(id);
+			servicio.delete(cod_compra);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al eliminar.");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -124,11 +124,12 @@ public class ComprasRestController {
 		}
 
 		if (compraActualizar == null) {
-			response.put("mensaje", "La compra id:".concat(id.toString().concat(" no existe en la BD.")));
+			response.put("mensaje", "La compra id:".concat(cod_compra.toString().concat(" no existe en la BD.")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		response.put("mensaje", "Eliminado con éxito.");
 		response.put("compra", compraActualizar);
+		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 }

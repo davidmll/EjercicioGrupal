@@ -33,7 +33,7 @@ public class ClienteController {
 		return servicio.findAll();
 	}
 
-	@GetMapping("/clientes/{codCliente}") // Paso el id en la dirección
+	@GetMapping("/cliente/{codCliente}") // Paso el id en la dirección
 	public ResponseEntity<?> findClienteById(@PathVariable Long codCliente) {
 
 		Cliente cliente = null;
@@ -59,7 +59,7 @@ public class ClienteController {
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 
-	@PostMapping("/cliente/guardarCliente")
+	@PostMapping("/cliente/saveCliente")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> saveCliente(@RequestBody Cliente cliente) {
 		Map<String, Object> response = new HashMap<>();
@@ -80,7 +80,7 @@ public class ClienteController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-	@PutMapping("/cliente/{codCliente}")
+	@PutMapping("/cliente/updateCliente/{codCliente}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> upDateCliente(@RequestBody Cliente cliente, @PathVariable Long codCliente) {
 
@@ -120,7 +120,7 @@ public class ClienteController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/clientes/{codCliente}")
+	@DeleteMapping("/cliente/deleteCliente/{codCliente}")
 	public ResponseEntity<?> deleteCliente(@PathVariable Long codCliente) {
 
 		Cliente clienteABorrar = servicio.findById(codCliente);
