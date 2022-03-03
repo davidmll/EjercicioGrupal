@@ -31,7 +31,7 @@ public class ArticuloController {
 		return servicio.findAll();
 	}
 	
-	@GetMapping("articulos/{id}")
+	@GetMapping("articulos/{codArticulo}")
 	public ResponseEntity<?>  findProductoById(@PathVariable Long codArticulo) {
 		Articulo articulo = null;
 		Map<String, Object> response=new HashMap<>();
@@ -76,7 +76,7 @@ public class ArticuloController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/articulo/{id}")
+	@PutMapping("/articulo/{codArticulo}")
 	public ResponseEntity<?> updateCliente(@RequestBody Articulo articulo, @PathVariable Long codArticulo) {
 		
 		Articulo articuloActual = servicio.findById(codArticulo);
