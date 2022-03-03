@@ -3,7 +3,14 @@ package com.projecto.java.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "compras")
@@ -16,17 +23,9 @@ public class Compra implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codCompra;
+	private Long cod_compra;
 
 	private int unidades;
-
-	@ManyToOne
-	@JoinColumn(name = "codCliente")
-	private Cliente cliente;
-
-	@ManyToOne
-	@JoinColumn(name = "codArticulo")
-	private Articulo articulo;
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
@@ -38,39 +37,20 @@ public class Compra implements Serializable {
 	}
 
 //	Getters and Setters
+	public Long getCod_compra() {
+		return cod_compra;
+	}
 
-	
+	public void setCod_compra(Long cod_compra) {
+		this.cod_compra = cod_compra;
+	}
 
 	public int getUnidades() {
 		return unidades;
 	}
 
-	public Long getCodCompra() {
-		return codCompra;
-	}
-
-	public void setCodCompra(Long codCompra) {
-		this.codCompra = codCompra;
-	}
-
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Articulo getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
 	}
 
 	public Date getFecha() {

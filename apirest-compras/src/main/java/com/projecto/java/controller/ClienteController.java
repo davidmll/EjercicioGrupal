@@ -3,7 +3,6 @@ package com.projecto.java.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,26 +17,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.standard.expression.Each;
 
 import com.projecto.java.entity.Cliente;
-import com.projecto.java.entity.Compra;
 import com.projecto.java.service.ClienteService;
-import com.projecto.java.service.CompraService;
 
 @RestController
 @RequestMapping("/api")
 public class ClienteController {
-	
+
 	@Autowired
 	private ClienteService servicio;
-	@Autowired
-	private CompraService servicioCompra;
 
 	@GetMapping("/clientes")
 	public List<Cliente> index() {
 		return servicio.findAll();
 	}
+
 	@GetMapping("/clientes/{codCliente}") // Paso el id en la dirección
 	public ResponseEntity<?> findClienteById(@PathVariable Long codCliente) {
 
@@ -57,11 +52,13 @@ public class ClienteController {
 		}
 
 		if (cliente == null) {
-			response.put("mensaje", "El cliente ID: ".concat(codCliente.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje",
+					"El cliente ID: ".concat(codCliente.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
+
 	@PostMapping("/cliente/guardarCliente")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> saveCliente(@RequestBody Cliente cliente) {
@@ -82,6 +79,7 @@ public class ClienteController {
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+
 	@PutMapping("/cliente/{codCliente}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> upDateCliente(@RequestBody Cliente cliente, @PathVariable Long codCliente) {
@@ -91,7 +89,8 @@ public class ClienteController {
 		Map<String, Object> response = new HashMap<>();
 
 		if (clienteActual == null) {
-			response.put("mensaje", "El cliente ID: ".concat(codCliente.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje",
+					"El cliente ID: ".concat(codCliente.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 
@@ -120,7 +119,7 @@ public class ClienteController {
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/clientes/{codCliente}")
 	public ResponseEntity<?> deleteCliente(@PathVariable Long codCliente) {
 
@@ -129,24 +128,11 @@ public class ClienteController {
 		Map<String, Object> response = new HashMap<>();
 
 		if (clienteABorrar == null) {
-			
+
 			response.put("mensaje", "El cliente ID: ".concat(codCliente.toString().concat(" no se pudo eliminar")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		
-		}else if (clienteABorrar.getCompras().size() > 0) {
-			
-			response.put("mensaje", "¡Espera! El cliente ID: ".concat(codCliente.toString().concat(" hizo compras.")));
-			
-			Set<Compra> comprasBorrar = clienteABorrar.getCompras();
-			
-			for (Compra compra : comprasBorrar) {	
-				
-				servicioCompra.deleteCompra(compra);
-				
-				}
-			response.put("mensaje", "El cliente ID: ".concat(codCliente.toString().concat(" ya se pude eliminar, se han borrado sus compras.")));
+
 		}
-		
 
 		try {
 			servicio.delete(codCliente);
