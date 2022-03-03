@@ -1,41 +1,42 @@
 package com.projecto.java.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="articulos")
-public class Articulo implements Serializable{
-	
-	
+@Table(name = "articulos")
+public class Articulo implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codArticulo;
 
 	private int unidades_stock;
 	private int stock_seguridad;
-	
+
 	private String imagen;
 	private String descripcion;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nombre;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private double precio_unidad;
-	
-	@OneToMany(mappedBy = "articulo")
-	private Set<Compra> compras;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "cod_compra")
+	private Compra compras;
+
 //	Getters and Setters
-
-
-	public String getNombre() {
-		return nombre;
-	}
 
 	public Long getCodArticulo() {
 		return codArticulo;
@@ -43,26 +44,6 @@ public class Articulo implements Serializable{
 
 	public void setCodArticulo(Long codArticulo) {
 		this.codArticulo = codArticulo;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public double getPrecio_unidad() {
-		return precio_unidad;
-	}
-
-	public void setPrecio_unidad(double precio_unidad) {
-		this.precio_unidad = precio_unidad;
 	}
 
 	public int getUnidades_stock() {
@@ -89,12 +70,36 @@ public class Articulo implements Serializable{
 		this.imagen = imagen;
 	}
 
-	public Set<Compra> getCompras() {
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio_unidad() {
+		return precio_unidad;
+	}
+
+	public void setPrecio_unidad(double precio_unidad) {
+		this.precio_unidad = precio_unidad;
+	}
+
+	public Compra getCompras() {
 		return compras;
 	}
-	
-	public void setCompras(Set<Compra> compras) {
+
+	public void setCompras(Compra compras) {
 		this.compras = compras;
 	}
-	
+
 }

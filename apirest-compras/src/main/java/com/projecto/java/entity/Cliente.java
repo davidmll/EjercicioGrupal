@@ -2,9 +2,19 @@ package com.projecto.java.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "clientes")
@@ -21,26 +31,28 @@ public class Cliente implements Serializable {
 	private String empresa;
 	private String puesto;
 	private String provincia;
-	
+
 	private int cp;
 	private int telefono;
 
-	@Column(name="fechaNacimiento")
+	@Column(name = "fechaNacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 
-	@OneToMany(mappedBy = "cliente")
-	private Set<Compra> compras;
+	// Si elimino un cliente sus compras ya no me interesan, las borro.
+	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "cod_compra")
+	private Compra compras;
 
 //	Method
-	
+
 	@PrePersist
 	public void prePersist() {
 		fechaNacimiento = new Date();
 	}
 
 //	Getters and Setters
-	
+
 	public Long getCodCliente() {
 		return codCliente;
 	}
@@ -113,11 +125,11 @@ public class Cliente implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Set<Compra> getCompras() {
+	public Compra getCompras() {
 		return compras;
 	}
 
-	public void setCompras(Set<Compra> compras) {
+	public void setCompras(Compra compras) {
 		this.compras = compras;
 	}
 
