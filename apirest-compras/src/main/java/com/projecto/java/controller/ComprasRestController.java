@@ -1,5 +1,6 @@
 package com.projecto.java.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class ComprasRestController {
 		return servicio.findAll();
 	}
 
-	@GetMapping("/compra/{cod_compra}")
+	@GetMapping("/compras/{cod_compra}")
 	public ResponseEntity<?> buscarCompraporId(@PathVariable Long cod_compra) {
 
 		Compra compra = null;
@@ -50,6 +51,30 @@ public class ComprasRestController {
 
 		if (compra == null) {
 			response.put("mensaje", "La compra con id:".concat(cod_compra.toString().concat(" no existe en la BD.")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Compra>(compra, HttpStatus.OK);
+	}
+	
+	@GetMapping("/compra/{fecha}")
+	public ResponseEntity<?> buscarCompraporFecha(@PathVariable Date fecha) {
+
+		Compra compra = null;
+
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			compra = servicio.findByFecha(fecha).get();
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar consulta");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (compra == null) {
+			response.put("mensaje", "La compra con id:".concat(fecha.toString().concat(" no existe en la BD.")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 

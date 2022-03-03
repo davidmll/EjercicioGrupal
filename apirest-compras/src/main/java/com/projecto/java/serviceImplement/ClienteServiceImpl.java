@@ -1,6 +1,7 @@
 package com.projecto.java.serviceImplement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,18 @@ public class ClienteServiceImpl implements ClienteService {
 		return repositorio.save(cliente);
 	}
 
-//	Pendiente
+
 	@Override
 	public Cliente deleteConRetorno(Long codCliente) {		
 		Cliente c = repositorio.findById(codCliente).get();
 		repositorio.deleteById(codCliente);
 		return c;
+	}
+
+	@Override
+	public Optional<Cliente> findByNombre(String nombre) {
+		
+		return repositorio.findByNombre(nombre);
 	}
 
 }

@@ -33,7 +33,7 @@ public class ClienteController {
 		return servicio.findAll();
 	}
 
-	@GetMapping("/cliente/{codCliente}") // Paso el id en la dirección
+	@GetMapping("/clientes/{codCliente}") // Paso el id en la dirección
 	public ResponseEntity<?> findClienteById(@PathVariable Long codCliente) {
 
 		Cliente cliente = null;
@@ -54,6 +54,32 @@ public class ClienteController {
 		if (cliente == null) {
 			response.put("mensaje",
 					"El cliente ID: ".concat(codCliente.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+	}
+	
+	@GetMapping("/cliente/{nombre}") 
+	public ResponseEntity<?> findClienteByNombre(@PathVariable String nombre) {
+
+		Cliente cliente = null;
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+
+			cliente = servicio.findByNombre(nombre).get();
+
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al reallizar consulta a base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		if (cliente == null) {
+			response.put("mensaje",
+					"El cliente ID: ".concat(nombre.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);

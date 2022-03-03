@@ -1,6 +1,8 @@
 package com.projecto.java.serviceImplement;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,12 @@ public class CompraServiceImpl implements CompraService {
 	public void deleteCompra(Compra c) {
 		compraDao.delete(c);
 		
+	}
+
+	@Override
+	public Optional<Compra> findByFecha(Date fecha) {
+		
+		return compraDao.findByFecha(fecha);
 	}
 
 }

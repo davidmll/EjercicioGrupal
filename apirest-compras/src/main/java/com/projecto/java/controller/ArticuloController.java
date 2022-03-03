@@ -23,14 +23,14 @@ public class ArticuloController {
 		return servicio.findAll();
 	}
 
-	@GetMapping("articulo/{codArticulo}")
+	@GetMapping("articulos/{codArticulo}")
 	public ResponseEntity<?> findProductoById(@PathVariable Long codArticulo) {
 		Articulo articulo = null;
 		Map<String, Object> response = new HashMap<>();
 
 		try {
 			articulo = servicio.findById(codArticulo);
-		} catch (DataAccessException e) {// MUY ESPECÍFICO, EXCEPCIONES SOBRE EL DAO
+		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al rellenar la consulta a base de datos");
 			response.put("error", e.getMessage().concat(e.getMostSpecificCause().getMessage()));
 
@@ -46,7 +46,31 @@ public class ArticuloController {
 		return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
 	}
 
+	@GetMapping("articulo/{nombre}")
+	public ResponseEntity<?> findProductoByNombre(@PathVariable String nombre) {
+		Articulo articulo = null;
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			articulo = servicio.findByNombre(nombre).get();
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al rellenar la consulta a base de datos");
+			response.put("error", e.getMessage().concat(e.getMostSpecificCause().getMessage()));
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (articulo == null) {
+			response.put("mensaje",
+					"El Código de articulo: ".concat(nombre.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+
+		}
+		return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
+	}
+
 	@PostMapping("/articulo/saveProducto")
+
 	public ResponseEntity<?> saveProducto(@RequestBody Articulo articulo) {
 		Articulo articuloNew = null;
 

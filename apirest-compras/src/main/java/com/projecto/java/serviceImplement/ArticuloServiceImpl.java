@@ -1,6 +1,7 @@
 package com.projecto.java.serviceImplement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,12 @@ public class ArticuloServiceImpl implements ArticuloService {
 	public void delete(Long codArticulo) {
 		articuloRepository.deleteById(codArticulo);
 		
+	}
+
+	@Override
+	public Optional<Articulo> findByNombre(String nombre) {
+		
+		return articuloRepository.findByNombre(nombre);
 	}
 
 }
