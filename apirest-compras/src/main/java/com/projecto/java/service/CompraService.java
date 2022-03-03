@@ -13,4 +13,5 @@ public interface CompraService {
 	public Compra save(Compra compra);
 
 	public void delete(Long id);
+	public void deleteCompra(Compra c);
 }

@@ -44,4 +44,11 @@ public class CompraServiceImpl implements CompraService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void deleteCompra(Compra c) {
+		compraDao.delete(c);
+		
+	}
+
 }

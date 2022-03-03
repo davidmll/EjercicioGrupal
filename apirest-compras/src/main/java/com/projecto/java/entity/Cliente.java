@@ -28,8 +28,9 @@ public class Cliente implements Serializable {
 	@Column(name="fechaNacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
-
-	@OneToMany(mappedBy = "cliente")
+	
+	// Si elimino un cliente sus compras ya no me interesan, las borro.
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
 	private Set<Compra> compras;
 
 //	Method
@@ -119,6 +120,10 @@ public class Cliente implements Serializable {
 
 	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
+	}
+	//Añadir compra a lista de compras de un cliente:
+	public void addCompra(Compra c) {
+		compras.add(c);
 	}
 
 }
