@@ -1,5 +1,7 @@
 package com.projecto.java.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,14 +60,20 @@ public class ComprasRestController {
 	}
 	
 	@GetMapping("/compra/{fecha}")
-	public ResponseEntity<?> buscarCompraporFecha(@PathVariable Date fecha) {
+	public ResponseEntity<?> buscarCompraporFecha(@PathVariable String fecha) {
 
 		Compra compra = null;
-
 		Map<String, Object> response = new HashMap<>();
 
+		Date date1 = null;
 		try {
-			compra = servicio.findByFecha(fecha).get();
+			date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			compra = servicio.findByFecha(date1).get();
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar consulta");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
